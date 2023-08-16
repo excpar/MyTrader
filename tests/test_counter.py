@@ -2,6 +2,7 @@
 from pathlib import Path
 
 import pytest
+
 from mytrader.counter import count, read_from_file, write_to_file
 
 
