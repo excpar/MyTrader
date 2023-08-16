@@ -3,15 +3,15 @@ import sys
 
 import pytest
 
-from word_count import cmdline
+from mytrader import main
 
 
 def test_help(mocker, capsys):
     """test help command"""
-    args = ['word_count', '-h']
+    args = ['mytrader', '-h']
     mocker.patch.object(sys, 'argv', args)
     with pytest.raises(SystemExit) as ex:
-        cmdline.main()
+        main.main()
 
     assert ex.value.code == 0
     outerr = capsys.readouterr()
@@ -20,10 +20,10 @@ def test_help(mocker, capsys):
 
 def test_only_pass_source(mocker, capsys):
     """test only pass -s """
-    args = ['word_count', '-s', 'foo']
+    args = ['mytrader', '-s', 'foo']
     mocker.patch.object(sys, 'argv', args)
     with pytest.raises(SystemExit) as ex:
-        cmdline.main()
+        main.main()
 
     assert ex.value.code == 2
     outerr = capsys.readouterr()
@@ -31,10 +31,10 @@ def test_only_pass_source(mocker, capsys):
 
 def test_only_pass_dest(mocker, capsys):
     """test only pass -d"""
-    args = ['word_count', '-d', 'foo']
+    args = ['mytrader', '-d', 'foo']
     mocker.patch.object(sys, 'argv', args)
     with pytest.raises(SystemExit) as ex:
-        cmdline.main()
+        main.main()
 
     assert ex.value.code == 2
     outerr = capsys.readouterr()
@@ -42,8 +42,8 @@ def test_only_pass_dest(mocker, capsys):
 
 def test_main(mocker):
     """test cmdline, and everything is fine."""
-    args = ['word_count', '-s', 'foo', '-d', 'bar']
+    args = ['mytrader', '-s', 'foo', '-d', 'bar']
     mocker.patch.object(sys, 'argv', args)
-    mock_count = mocker.patch('word_count.cmdline.count')
-    cmdline.main()
+    mock_count = mocker.patch('mytrader.cmdline.count')
+    main.main()
     mock_count.assert_called_once()

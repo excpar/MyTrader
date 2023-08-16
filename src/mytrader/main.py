@@ -2,7 +2,6 @@
 
 import argparse
 import sys
-
 from mytrader.counter import count
 
 
